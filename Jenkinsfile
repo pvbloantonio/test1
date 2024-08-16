@@ -45,4 +45,16 @@ pipeline {
             }
         }
     }
+
+     post {
+        success {
+            slackSend(channel: '#integracion-slack-con-jenkins', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully")
+        }
+        failure {
+            slackSend(channel: '#integracion-slack-con-jenkins', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed")
+        }
+        always {
+            slackSend(channel: '#integracion-slack-con-jenkins', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' finished with status: ${currentBuild.currentResult}")
+        }
+    }
 }
