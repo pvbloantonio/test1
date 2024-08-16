@@ -48,13 +48,13 @@ pipeline {
 
       post {
         success {
-            slackSend(channel: '#tu-canal', tokenCredentialId: 'slack-token', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully")
+            slackSend(channel: '#integracion-slack-con-jenkins', tokenCredentialId: 'slack-token', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully")
         }
         failure {
-            slackSend(channel: '#tu-canal', tokenCredentialId: 'slack-token', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed")
+            slackSend(channel: '#integracion-slack-con-jenkins', tokenCredentialId: 'slack-token', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed")
         }
         always {
-            slackSend(channel: '#tu-canal', tokenCredentialId: 'slack-token', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' finished with status: ${currentBuild.currentResult}")
+            slackSend(channel: '#integracion-slack-con-jenkins', tokenCredentialId: 'slack-token', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' finished with status: ${currentBuild.currentResult}")
         }
     }
 }
