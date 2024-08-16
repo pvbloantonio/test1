@@ -45,6 +45,7 @@ pipeline {
             }
         }
     }
+    
       post {
         success {
             slackSend(channel: '#integracion-slack-con-jenkins', tokenCredentialId: 'slack-token', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully")
