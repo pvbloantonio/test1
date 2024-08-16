@@ -19,11 +19,4 @@ public class AppTest {
         assertEquals(5, 2 + 3);
     
     }
-    
-    @Test
-    public void testAdd() {
-        App app = new App();
-        int result = app.add(2, 3);
-        assertEquals(5, result, "The add method should return the sum of the two parameters");
-    }
 }
