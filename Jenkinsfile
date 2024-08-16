@@ -21,13 +21,13 @@ pipeline {
             }
         }
 
+        stages {
         stage('Test') {
-        steps {
-            echo 'Running unit tests...'
-            sh 'mvnw test'
-            junit '**/target/surefire-reports/*.xml'
+            steps {
+                sh 'mvnw test'
             }
-        }   	
+        }
+        }	
         
         stage('Deploy') {
             steps {
