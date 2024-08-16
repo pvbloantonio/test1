@@ -20,7 +20,6 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-
         stages {
         stage('Test') {
             steps {
@@ -28,7 +27,6 @@ pipeline {
             }
         }
         }	
-        
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
