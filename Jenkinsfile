@@ -16,17 +16,18 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                // Aquí puedes agregar tus comandos de compilación, por ejemplo:
+                // Aquí puedes agregar tus comandos de compilación
                 sh 'mvn clean install'
             }
         }
-        stages {
+
         stage('Test') {
             steps {
-                sh 'mvnw test'
+                echo 'Testing...'
+                sh 'mvn test'
             }
         }
-        }	
+        	
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
