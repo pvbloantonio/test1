@@ -20,6 +20,7 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
+
         stage('Test') {
         steps {
             echo 'Running unit tests...'
@@ -27,6 +28,7 @@ pipeline {
             junit '**/target/surefire-reports/*.xml'
             }
         }   	
+        
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
