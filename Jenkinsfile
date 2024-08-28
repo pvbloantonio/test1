@@ -45,10 +45,10 @@ pipeline {
             }
         }
 
-        stage('Code Coverage') {
+       stage('Archive JaCoCo Report') {
             steps {
-                echo 'Publishing Cobertura coverage report...'
-                cobertura coberturaReportFile: '**/target/site/cobertura/coverage.xml'
+                echo 'Archiving JaCoCo coverage report...'
+                archiveArtifacts artifacts: '**/target/site/jacoco/*', allowEmptyArchive: true
             }
         }
     }
