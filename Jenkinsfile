@@ -44,6 +44,13 @@ pipeline {
                 //sh 'kubectl apply -f deployment.yaml'
             }
         }
+
+        stage('Code Coverage') {
+            steps {
+                echo 'Generating JaCoCo report...'
+                jacoco execPattern: '**/target/jacoco.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java', exclusionPattern: '**/target/test-classes'
+            }
+        }
     }
       post {
         success {
