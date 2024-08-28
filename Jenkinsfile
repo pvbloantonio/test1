@@ -47,8 +47,8 @@ pipeline {
 
         stage('Code Coverage') {
             steps {
-                echo 'Generating JaCoCo report...'
-                jacoco execPattern: '**/target/jacoco.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java', exclusionPattern: '**/target/test-classes'
+                echo 'Publishing Cobertura coverage report...'
+                cobertura coberturaReportFile: '**/target/site/cobertura/coverage.xml'
             }
         }
     }
