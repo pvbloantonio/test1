@@ -9,12 +9,18 @@
     public static void main( String[] args )
     {
 <span class="nc" id="L11">        System.out.println( &quot;Hello World!&quot; );</span>
-<span class="nc" id="L12">    }</span>
+
+        // Mantener la aplicación corriendo indefinidamente
+        try {
+<span class="nc" id="L15">            Thread.sleep(Long.MAX_VALUE);</span>
+<span class="nc" id="L16">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L17">            e.printStackTrace();</span>
+<span class="nc" id="L18">        }</span>
+<span class="nc" id="L19">    }</span>
 
     public int add(int a, int b)
     {
-<span class="nc" id="L16">        return a +b;</span>
+<span class="nc" id="L23">        return a + b;</span>
     }
-    
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
