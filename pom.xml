@@ -28,7 +28,9 @@
     </dependency>
   </dependencies>
   <build>
+  <finalName>app</finalName> <!-- Cambiar el nombre del JAR generado a "app.jar" -->
     <plugins>
+     
      <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
