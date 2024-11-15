@@ -51,6 +51,22 @@ pipeline {
                 archiveArtifacts artifacts: '**/target/site/jacoco/*', allowEmptyArchive: true
             }
         }
+
+        stage('Docker Build') {
+            steps {
+                echo 'Building Docker Image...'
+                // Construir la imagen Docker
+                sh 'docker build -t test1_app:latest .'
+            }
+}
+
+        stage('Docker Run') {
+            steps {
+                echo 'Running Docker Container...'
+                // Ejecutar el contenedor Docker basado en la imagen
+                sh 'docker run -d -p 8080:8080 --name test1_app_container test1_app:latest'
+            }
+        }
     }
       post {
         success {
