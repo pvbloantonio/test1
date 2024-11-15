@@ -26,6 +26,19 @@
         <version>1.10.0</version>
         <scope>test</scope>
     </dependency>
+      <!-- Dependencia para Spring Boot Web -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>3.0.0</version> <!-- Cambia esta versión según necesites -->
+    </dependency>
+    
+    <!-- Dependencia de Spring Boot -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <version>3.0.0</version>
+    </dependency>
   </dependencies>
   <build>
   <finalName>app</finalName> <!-- Cambiar el nombre del JAR generado a "app.jar" -->
