@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                // El checkout debe estar dentro de un bloque steps
                 checkout scm
             }
         }
@@ -16,7 +15,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                // Aquí puedes agregar tus comandos de compilación
                 sh 'mvn clean install'
             }
         }
@@ -24,7 +22,6 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                // Ejecuta los tests
                 sh 'mvn test'
             }
         }
@@ -32,43 +29,43 @@ pipeline {
         stage('Publish Test Results') {
             steps {
                 echo 'Publishing JUnit test results...'
-                // Publica los resultados de las pruebas
                 junit '**/target/surefire-reports/*.xml'
             }
         }
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-                // Aquí puedes agregar tus comandos de despliegue, por ejemplo:
-                //sh 'kubectl apply -f deployment.yaml'
-            }
-        }
-
-       stage('Archive JaCoCo Report') {
+        stage('Archive JaCoCo Report') {
             steps {
                 echo 'Archiving JaCoCo coverage report...'
                 archiveArtifacts artifacts: '**/target/site/jacoco/*', allowEmptyArchive: true
             }
         }
 
-        stage('Docker Build') {
+        stage('Deploy Docker Container') {
             steps {
-                echo 'Building Docker Image...'
-                // Construir la imagen Docker
-                sh 'docker build -t test1_app:latest .'
+                echo 'Deploying Docker Container...'
+                sh '''
+                docker build -t test1_app:latest .
+                docker stop test1_app_container || true
+                docker rm test1_app_container || true
+                docker run -d -p 8080:8080 --name test1_app_container test1_app:latest
+                '''
             }
-}
+        }
 
-        stage('Docker Run') {
+        stage('Provision Infrastructure with Terraform') {
             steps {
-                echo 'Running Docker Container...'
-                // Ejecutar el contenedor Docker basado en la imagen
-                sh 'docker run -d -p 8080:8080 --name test1_app_container test1_app:latest'
+                echo 'Running Terraform to provision infrastructure...'
+                dir('terraform') {
+                    sh '''
+                    terraform init
+                    terraform apply -auto-approve
+                    '''
+                }
             }
         }
     }
-      post {
+
+    post {
         success {
             slackSend(channel: '#integracion-slack-con-jenkins', tokenCredentialId: 'slack-token', message: "Pipeline '${env.JOB_NAME} [${env.BUILD_NUMBER}]' completed successfully")
         }
