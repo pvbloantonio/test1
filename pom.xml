@@ -38,7 +38,6 @@
   </dependencies>
 
   <build>
-    <finalName>app</finalName> <!-- Cambiar el nombre del JAR generado a "app.jar" -->
     <plugins>
         <!-- Plugin para Jacoco (cobertura de pruebas) -->
         <plugin>
@@ -77,6 +76,13 @@
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
         </plugin>
     </plugins>
   </build>
